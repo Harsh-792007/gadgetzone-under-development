@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo-img { height: 60px; width: auto; }
+.nav-menu { display: flex; list-style: none; gap: 2.5rem; }
+.nav-link { color: #d0d0d0; text-decoration: none; font-weight: 500; transition: 0.3s; }
+.nav-link:hover { color: #f4d03f; }
+
+/* --- Hamburger Icon --- */
+.menu-btn { display: none; }
+.menu-icon { cursor: pointer; display: none; padding: 20px 10px; z-index: 1001; }
+.navicon { background: #fff; display: block; height: 2px; width: 25px; position: relative; }
+.navicon::before, .navicon::after { background: #fff; content: ''; display: block; height: 100%; width: 100%; position: absolute; transition: .2s; }
+.navicon::before { top: 8px; }
+.navicon::after { top: -8px; }
+
+/* --- PC Character Grid --- */
+.main-content { flex: 1; display: flex; align-items: center; padding: 4rem 2rem; }
+.content-container { display: flex; align-items: center; gap: 4rem; max-width: 1400px; margin: 0 auto; width: 100%; }
+
+.image-grid-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 60px; 
+    padding: 20px;
+    width: 100%;
+    max-width: 850px; 
+}
+
+.grid-line { position: absolute; background: #ffffff; box-shadow: 0 0 20px #ffffff; z-index: 1; }
+.horizontal { top: 50%; width: 100%; height: 3px; transform: translateY(-50%); }
+.vertical { left: 50%; height: 100%; width: 3px; transform: translateX(-50%); }
+
+.grid-item { z-index: 2; display: flex; justify-content: center; align-items: center; }
+.grid-item img {
+    width: 100%;
+    max-width: 280px; /* PC Logos Big */
+    height: auto;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
+    transition: 0.4s ease;
+}
+.grid-item img:hover { transform: scale(1.1); }
+
+/* --- Content Styling --- */
+.main-heading { font-size: 3.5rem; color: #f4d03f; margin-bottom: 2rem; }
+.description { font-size: 1.2rem; line-height: 1.8; color: #c0c0c0; margin-bottom: 2.5rem; }
+
+.social-links { display: flex; gap: 1.5rem; }
+.social-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; }
+.social-icon.facebook { background: #3b5998; }
+.social-icon.twitter { background: #000; } /* X is black */
+.social-icon.instagram { background: linear-gradient(45deg, #f09433, #dc2743, #cc2366); }
+
+.footer { background: #000; padding: 1.5rem; text-align: center; color: #888; font-size: 0.9rem; border-top: 1px solid #222; }
+
+/* --- Mobile Fixes --- */
+@media (max-width: 900px) {
+    .content-container { flex-direction: column; text-align: center; }
+    .image-grid-container { max-width: 500px; gap: 40px; }
+    .grid-item img { max-width: 200px; }
+}
+
+@media (max-width: 768px) {
+    .menu-icon { display: block; }
+    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+        position: absolute; 
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 100%); 
+        background: rgba(0, 0, 0, 0.85); /* Glass effect */
+        backdrop-filter: blur(15px);
+        z-index: 999;
+        gap: 2.5rem;
+    }
+
+    .nav-link { font-size: 1.8rem; text-align: center; width: 100%; }
+
+    .menu-btn:checked ~ .nav-menu { display: flex; }
+    
+    /* Social logos centering on mobile */
+    .social-links { justify-content: center; margin-top: 1rem; }
+
+    .image-grid-container { max-width: 380px; gap: 30px; }
+    .grid-item img { max-width: 160px; } /* Slightly less for mobile */
+    .main-heading { font-size: 2.2rem; }
+}
